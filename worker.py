@@ -14,16 +14,16 @@ else:
     logging.getLogger("requests").setLevel(logging.WARNING)
 
 
-redis = Redis(host="redis-service.teoschool.svc", port=6379)
+redis = Redis("redis")
 
 
 def get_random_bytes():
-    r = requests.get("http://rng-service.teoschool.svc:80")
+    r = requests.get("http://rng/32")
     return r.content
 
 
 def hash_bytes(data):
-    r = requests.post("http://hasher-service.teoschool.svc:80",
+    r = requests.post("http://hasher/",
                       data=data,
                       headers={"Content-Type": "application/octet-stream"})
     hex_hash = r.text
