@@ -1,5 +1,5 @@
 FROM python:alpine
-RUN pip install redis
-RUN pip install requests
+COPY requirements.txt /tmp/
+RUN pip install -r /tmp/requirements.txt
 COPY worker.py /
 CMD ["python", "worker.py"]
